@@ -10,9 +10,9 @@ Sound files are played with `paplay`. If you're on Arch Linux like me, you'll ne
 
 You can install reverb.nvim using your preferred plugin manager. Here's an example using [Lazy](https://github.com/folke/lazy.nvim):
 
-```vim
+```lua
 " Lazy configuration
-Lazy {
+{
   "whleucka/reverb.nvim",
   event = "BufReadPre",
   opts = {
@@ -45,8 +45,8 @@ reverb.nvim is designed to play sounds during specific autocmd events. Here's a 
 
 By default, reverb.nvim comes with a set of predefined sounds for each event. However, you can customize these sounds to suit your preferences. To do so, configure the plugin's options in your Neovim configuration. Here's an example of customizing the sounds using the Lazy plugin:
 
-```vim
-Lazy {
+```lua
+{
   "whleucka/reverb.nvim",
   event = "BufReadPre",
   opts = {
