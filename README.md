@@ -17,12 +17,12 @@ You can install reverb.nvim using your preferred plugin manager. Here's an examp
   event = "BufReadPre",
   opts = {
     sounds = {
-      buf_read = ...,
-      cursor_moved = ...,
-      insert_enter = ...,
-      insert_leave = ...,
-      exit_pre = ...,
-      buf_write = ...,
+      buf_read = nil,
+      cursor_moved = nil,
+      insert_enter = nil,
+      insert_leave = nil,
+      exit_pre = nil,
+      buf_write = nil,
     },
   },
 }
@@ -39,11 +39,11 @@ reverb.nvim is designed to play sounds during specific autocmd events. Here's a 
 - **ExitPre**: Triggered before exiting Neovim. Sound: `exit_pre`
 - **BufWrite**: Triggered before writing a buffer to disk, if modified. Sound: `buf_write`
 
-*NOTE* Contributions are welcome. If you'd like to add something, please feel free to open a PR 😄
+**NOTE**: Contributions are welcome. If you'd like to add something, please feel free to open a PR 😄
 
 ## Customization
 
-By default, reverb.nvim comes with a set of predefined sounds for each event. However, you can customize these sounds to suit your preferences. To do so, configure the plugin's options in your Neovim configuration. Here's an example of customizing the sounds using the Lazy plugin:
+By default, reverb.nvim does ship with any sounds. However, you can customize the opts to suit your preferences. To do so, configure the plugin's options in your Neovim configuration. Here's an example of customizing the sounds using the Lazy plugin:
 
 ```lua
 {
