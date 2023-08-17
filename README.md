@@ -11,7 +11,6 @@ Sound files are played with `paplay`. If you're on Arch Linux like me, you'll ne
 You can install reverb.nvim using your preferred plugin manager. Here's an example using [Lazy](https://github.com/folke/lazy.nvim):
 
 ```lua
-" Lazy configuration
 {
   "whleucka/reverb.nvim",
   event = "BufReadPre",
