@@ -1,6 +1,11 @@
-# reverb.nvim
+# reverb.nvim 🔊
 
 reverb.nvim is a Neovim plugin that adds sound effects to specific autocmd events. With this plugin, you can enhance your Neovim experience by associating various sounds with different actions, providing an auditory dimension to your coding environment.
+
+https://github.com/whleucka/reverb.nvim/assets/71740767/b53a4a71-a010-4ff3-bd95-4a0908abdfcb
+
+⭐ *Turn sound on* 
+
 
 ## Dependencies
 
