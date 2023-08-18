@@ -2,15 +2,15 @@
 
 reverb.nvim is a Neovim plugin that adds sound effects to specific autocmd events. With this plugin, you can enhance your Neovim experience by associating various sounds with different actions, providing an auditory dimension to your coding environment.
 
-https://github.com/whleucka/reverb.nvim/assets/71740767/b53a4a71-a010-4ff3-bd95-4a0908abdfcb
+https://github.com/whleucka/reverb.nvim/assets/71740767/1e3a16f0-8562-41fd-8d71-bb136ab953e3
 
 ⭐ *Turn sound on* 
-
-This plugin most likely works on Linux, only. 
 
 Any suggestions or help is welcome and appreciated 😄
 
 ## Dependencies
+
+This plugin most likely works on Linux, only. 
 
 Sound files are played with `paplay`. Check with your package manager if you're not sure.
 
