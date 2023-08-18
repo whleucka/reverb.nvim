@@ -1,12 +1,20 @@
-local settings = require("settings")
-
 local M = {}
 
-M.play_sound = function (event)
-    if settings.options.sounds[event] == nil then
-        return
+-- Play a sound using paplay
+M.play_sound = function (path)
+    vim.fn.system(string.format("paplay %s &", path))
+end
+
+-- Good old path exists function 
+M.path_exists = function (path)
+    local ok, err, code = os.rename(path, path)
+    if not ok then
+        if code == 13 then
+            -- Permission denied, but it exists
+            return true
+        end
     end
-    vim.fn.system(string.format("paplay %s &", settings.options.sounds[event]))
+    return ok, err
 end
 
 return M;
