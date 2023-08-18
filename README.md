@@ -16,7 +16,7 @@ Sound files are played with `paplay`. Check with your package manager if you're 
 
 ## Installation
 
-By default, reverb.nvim does ship with any sounds. However, you can customize the opts to suit your preferences. To do so, configure the plugin's options in your Neovim configuration. Here's an example of customizing the sounds using [Lazy](https://github.com/folke/lazy.nvim):
+By default, reverb.nvim does ship with any sounds. To get started, configure the plugin's options in your Neovim configuration. Here's an example of customizing the sounds using [Lazy](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
