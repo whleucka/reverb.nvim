@@ -36,6 +36,10 @@ By default, reverb.nvim does ship with any sounds. To get started, configure the
 }
 ```
 
+## Sound Effects
+
+Free (CC0) interface sounds at [https://www.kenney.nl/assets/interface-sounds](https://www.kenney.nl/assets/interface-sounds)
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
