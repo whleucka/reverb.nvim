@@ -9,7 +9,7 @@ end
 -- Play a sound using paplay
 M.play_sound = function(path, human_volume)
     local paplay_volume = convert_volume(human_volume)
-    vim.fn.system(string.format("paplay %s --volume-%d &", path, paplay_volume))
+    vim.fn.system(string.format("paplay %s --volume=%d &", path, paplay_volume))
 end
 
 -- Good old path exists function
