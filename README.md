@@ -26,11 +26,11 @@ By default, reverb.nvim does ship with any sounds. To get started, configure the
     sounds = {
       -- add custom sound paths for other events here
       -- eg. EVENT = "/some/path/to/sound.mp3"
-      BufRead = sound_dir .. "start.ogg",
-      CursorMovedI =  sound_dir .. "click.ogg",
-      InsertLeave = sound_dir .. "toggle.ogg",
-      ExitPre = sound_dir .. "exit.ogg",
-      BufWrite = sound_dir .. "save.ogg",
+      BufRead = { path = sound_dir .. "start.ogg", volume = 0-100 },
+      CursorMovedI = { path = sound_dir .. "click.ogg", volume = 0-100 },
+      InsertLeave = { path = sound_dir .. "toggle.ogg", volume = 0-100 },
+      ExitPre = { path = sound_dir .. "exit.ogg", volume = 0-100 },
+      BufWrite = { path = sound_dir .. "save.ogg", volume = 0-100 },
     },
   },
 }
