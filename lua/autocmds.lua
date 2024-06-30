@@ -6,6 +6,8 @@ vim.api.nvim_create_augroup("reverb", {
     clear = true,
 })
 
+local missing_sounds = {}
+
 -- Autocmd callback
 local cb = function(event, sound)
     if utils.path_exists(sound.path) then
@@ -19,6 +21,11 @@ local cb = function(event, sound)
             end
         else
             utils.play_sound(sound.path, sound.volume)
+        end
+    else
+        if not missing_sounds[sound.path] then
+            missing_sounds[sound.path] = true
+            print("file " .. sound.path .. "does not exist")
         end
     end
 end
