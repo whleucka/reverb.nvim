@@ -10,22 +10,23 @@ local missing_sounds = {}
 
 -- Autocmd callback
 local cb = function(event, sound)
-    if utils.path_exists(sound.path) then
+    local path = vim.fn.expand(sound.path)
+    if utils.path_exists(path) then
         -- There could be other events?
         if event == "BufWrite" then
             -- only if the buffer has been modified ?
             local buf = vim.api.nvim_get_current_buf()
             local buf_modified = vim.api.nvim_buf_get_option(buf, "modified")
             if buf_modified then
-                utils.play_sound(sound.path, sound.volume)
+                utils.play_sound(path, sound.volume)
             end
         else
-            utils.play_sound(sound.path, sound.volume)
+            utils.play_sound(path, sound.volume)
         end
     else
-        if not missing_sounds[sound.path] then
-            missing_sounds[sound.path] = true
-            print("file " .. sound.path .. "does not exist")
+        if not missing_sounds[path] then
+            missing_sounds[path] = true
+            print("file " .. path .. "does not exist")
         end
     end
 end
