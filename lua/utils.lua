@@ -1,6 +1,7 @@
 local M = {}
 
 local function convert_volume(human_volume)
+    human_volume = human_volume or 100
     local clamped_volume = math.max(0, math.min(100, human_volume))
     local paplay_volume = math.floor(clamped_volume * 655.36)
     return paplay_volume
