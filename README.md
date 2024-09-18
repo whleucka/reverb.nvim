@@ -23,6 +23,7 @@ By default, reverb.nvim does *not* ship with any sounds. To get started, configu
   "whleucka/reverb.nvim",
   event = "BufReadPre",
   opts = {
+    player = "pw-play" -- default: paplay
     sounds = {
       -- add custom sound paths for other events here
       -- eg. EVENT = "/some/path/to/sound.mp3"

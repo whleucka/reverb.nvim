@@ -9,8 +9,18 @@ vim.api.nvim_create_augroup("reverb", {
 local missing_sounds = {}
 
 -- Autocmd callback
-local cb = function(event, sound)
+local cb = function(event, sound, player)
     local path = vim.fn.expand(sound.path)
+
+    -- Choose which player command should be used
+    -- Choose paplay as default
+    local player_function = utils.paplay_play_sound
+    if player == "paplay" then
+        player_function = utils.paplay_play_sound
+    elseif player == "pw-play" then
+        player_function = utils.pw_play_play_sound
+    end
+
     if utils.path_exists(path) then
         -- There could be other events?
         if event == "BufWrite" then
@@ -18,10 +28,10 @@ local cb = function(event, sound)
             local buf = vim.api.nvim_get_current_buf()
             local buf_modified = vim.api.nvim_buf_get_option(buf, "modified")
             if buf_modified then
-                utils.play_sound(path, sound.volume)
+                player_function(path, sound.volume)
             end
         else
-            utils.play_sound(path, sound.volume)
+            player_function(path, sound.volume)
         end
     else
         if not missing_sounds[path] then
@@ -33,16 +43,15 @@ end
 
 -- Options are loaded from lua/reverb.lua
 M.load = function(opts)
-    for _, sounds in pairs(opts) do
-        for event, sound in pairs(sounds) do
-            vim.api.nvim_create_autocmd(event, {
-                group = "reverb",
-                pattern = "*",
-                callback = function()
-                    cb(event, sound)
-                end,
-            })
-        end
+    local sounds = opts.sounds
+    for event, sound in pairs(sounds) do
+        vim.api.nvim_create_autocmd(event, {
+            group = "reverb",
+            pattern = "*",
+            callback = function()
+                cb(event, sound, opts.player)
+            end,
+        })
     end
 end
 
