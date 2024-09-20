@@ -8,9 +8,17 @@ vim.api.nvim_create_augroup("reverb", {
 
 local missing_sounds = {}
 
+RUNNING_PROCESSES = 0
+
 -- Autocmd callback
-local cb = function(event, sound, player)
+local cb = function(event, sound, player, max_sounds)
     local path = vim.fn.expand(sound.path)
+
+    -- Don't play if enough processes are already playing
+    local max_running_processes = max_sounds or 20
+    if RUNNING_PROCESSES >= max_running_processes then
+        return
+    end
 
     -- Choose which player command should be used
     -- Choose paplay as default
@@ -28,9 +36,11 @@ local cb = function(event, sound, player)
             local buf = vim.api.nvim_get_current_buf()
             local buf_modified = vim.api.nvim_buf_get_option(buf, "modified")
             if buf_modified then
+                RUNNING_PROCESSES = RUNNING_PROCESSES + 1
                 player_function(path, sound.volume)
             end
         else
+            RUNNING_PROCESSES = RUNNING_PROCESSES + 1
             player_function(path, sound.volume)
         end
     else
@@ -49,7 +59,7 @@ M.load = function(opts)
             group = "reverb",
             pattern = "*",
             callback = function()
-                cb(event, sound, opts.player)
+                cb(event, sound, opts.player, opts.max_sounds)
             end,
         })
     end
