@@ -24,6 +24,7 @@ By default, reverb.nvim does *not* ship with any sounds. To get started, configu
   event = "BufReadPre",
   opts = {
     player = "pw-play" -- default: paplay
+    max_sounds = 20, -- Limit the amount of sounds that can play at the same time
     sounds = {
       -- add custom sound paths for other events here
       -- eg. EVENT = "/some/path/to/sound.mp3"

@@ -11,10 +11,12 @@ local missing_sounds = {}
 RUNNING_PROCESSES = 0
 
 -- Autocmd callback
-local cb = function(event, sound, player)
+local cb = function(event, sound, player, max_sounds)
     local path = vim.fn.expand(sound.path)
 
-    if RUNNING_PROCESSES >= 15 then
+    -- Don't play if enough processes are already playing
+    local max_running_processes = max_sounds or 20
+    if RUNNING_PROCESSES >= max_running_processes then
         return
     end
 
@@ -57,7 +59,7 @@ M.load = function(opts)
             group = "reverb",
             pattern = "*",
             callback = function()
-                cb(event, sound, opts.player)
+                cb(event, sound, opts.player, opts.max_sounds)
             end,
         })
     end
