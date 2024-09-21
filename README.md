@@ -10,9 +10,7 @@ Any suggestions or help is welcome and appreciated 😄
 
 ## Dependencies
 
-This plugin most likely works on Linux, only. 
-
-Sound files are played with `paplay`. Check with your package manager if you're not sure.
+Sound files cam be played with `paplay` or `pw-play`. Check with your local package manager if you're not sure.
 
 ## Installation
 
