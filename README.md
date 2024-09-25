@@ -10,7 +10,7 @@ Any suggestions or help is welcome and appreciated 😄
 
 ## Dependencies
 
-Sound files cam be played with `paplay` or `pw-play`. Check with your local package manager if you're not sure.
+Sound files cam be played with `paplay`, `pw-play` or `mpv`. Check with your local package manager if you're not sure.
 
 ## Installation
 
@@ -21,7 +21,7 @@ By default, reverb.nvim does *not* ship with any sounds. To get started, configu
   "whleucka/reverb.nvim",
   event = "BufReadPre",
   opts = {
-    player = "pw-play" -- default: paplay
+    player = "paplay" -- options: paplay (default), pw-play, mpv
     max_sounds = 20, -- Limit the amount of sounds that can play at the same time
     sounds = {
       -- add custom sound paths for other events here

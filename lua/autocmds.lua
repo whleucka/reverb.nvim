@@ -27,6 +27,8 @@ local cb = function(event, sound, player, max_sounds)
         player_function = utils.paplay_play_sound
     elseif player == "pw-play" then
         player_function = utils.pw_play_play_sound
+    elseif player == "mpv" then
+        player_function = utils.mpv_play_sound
     end
 
     if utils.path_exists(path) then
