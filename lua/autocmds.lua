@@ -10,8 +10,12 @@ local missing_sounds = {}
 
 RUNNING_PROCESSES = 0
 
--- Autocmd callback
 local cb = function(event, sound, player, max_sounds)
+    -- Don't do anything if the plugin is disabled
+    if not PLUGIN_ENABLED then
+        return
+    end
+
     local path = vim.fn.expand(sound.path)
 
     -- Don't play if enough processes are already playing
