@@ -15,6 +15,14 @@ function M.disable()
     print("reverb.nvim: Plugin disabled")
 end
 
+function M.toggle()
+    if PLUGIN_ENABLED then
+        M.disable()
+    else
+        M.enable()
+    end
+end
+
 -- opts provided via setup, else default options (no sounds)
 function M.setup(opts)
     opts = opts or {}
@@ -26,6 +34,6 @@ end
 -- register enable/disable
 vim.api.nvim_create_user_command("ReverbEnable", M.enable, {})
 vim.api.nvim_create_user_command("ReverbDisable", M.disable, {})
-
+vim.api.nvim_create_user_command("ReverbToggle", M.toggle, {})
 
 return M;
