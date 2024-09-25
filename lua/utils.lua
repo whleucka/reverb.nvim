@@ -1,7 +1,11 @@
 local M = {}
+local uv = vim.uv
 
-local function finished_playing()
+local function finished_playing(code)
     RUNNING_PROCESSES = RUNNING_PROCESSES -1
+    if code ~= 0 then
+        print("reverb.nvim: Couldn't play sound, exit code: " .. code)
+    end
 end
 
 -- Returns a value between 0.0 and 1.0
@@ -15,13 +19,19 @@ end
 -- Play a sound using paplay
 M.paplay_play_sound = function(path, human_volume)
     local volume = math.floor(convert_volume(human_volume) * 65536.0)
-    vim.system({ 'paplay', path, '--volume', tostring(volume) }, {}, finished_playing)
+    local handle, pid = uv.spawn('paplay', { args = { path, '--volume', tostring(volume) } }, finished_playing)
+    if handle == nil then
+        print("reverb.nvim: Could not spawn paplay")
+    end
 end
 
 -- Play a sound using pwplay
 M.pw_play_play_sound = function(path, human_volume)
     local volume = convert_volume(human_volume)
-    vim.system({ 'pw-play', path, '--volume', tostring(volume) }, {}, finished_playing)
+    local handle, pid = uv.spawn('pw-play', { args = { path, '--volume', tostring(volume) } }, finished_playing)
+    if handle == nil then
+        print("reverb.nvim: Could not spawn pw-play")
+    end
 end
 
 -- Good old path exists function
