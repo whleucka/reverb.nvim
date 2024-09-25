@@ -34,6 +34,18 @@ M.pw_play_play_sound = function(path, human_volume)
     end
 end
 
+-- Play a sound using mpv
+M.mpv_play_sound = function(path, human_volume)
+    local volume = convert_volume(human_volume) * 100
+    local handle, pid = uv.spawn('mpv', {
+            args = { path, '--volume='..tostring(volume), '--no-keep-open' },
+            verbatism = true  -- To fix some issue with quoting paths on windows
+        }, finished_playing)
+    if handle == nil then
+        print("reverb.nvim: Could not spawn mpv")
+    end
+end
+
 -- Good old path exists function
 M.path_exists = function(path)
     local ok, err, code = os.rename(path, path)
