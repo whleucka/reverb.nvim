@@ -36,7 +36,12 @@ To get started, configure the plugin's options in your Neovim configuration. Her
 }
 ```
 
-Sounds can be enabled with `:ReverbEnable` and disabled with `:ReverbDisable`.
+You can manage the sound settings in reverb.nvim with the following commands:
+
+- `:ReverbToggle` to switch sounds on or off.
+- `:ReverbEnable` to turn sounds on.
+- `:ReverbDisable` to turn sounds off.
+
 
 ## Sound Effects
 
