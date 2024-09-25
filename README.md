@@ -21,7 +21,7 @@ By default, reverb.nvim does *not* ship with any sounds. To get started, configu
   "whleucka/reverb.nvim",
   event = "BufReadPre",
   opts = {
-    player = "paplay" -- options: paplay (default), pw-play, mpv
+    player = "paplay", -- options: paplay (default), pw-play, mpv
     max_sounds = 20, -- Limit the amount of sounds that can play at the same time
     sounds = {
       -- add custom sound paths for other events here
