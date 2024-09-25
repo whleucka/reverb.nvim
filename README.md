@@ -14,7 +14,7 @@ Sound files cam be played with `paplay`, `pw-play` or `mpv`. Check with your loc
 
 ## Installation
 
-By default, reverb.nvim does *not* ship with any sounds. To get started, configure the plugin's options in your Neovim configuration. Here's an example of customizing the sounds using [Lazy](https://github.com/folke/lazy.nvim):
+To get started, configure the plugin's options in your Neovim configuration. Here's an example of customizing the sounds using [Lazy](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
@@ -36,9 +36,12 @@ By default, reverb.nvim does *not* ship with any sounds. To get started, configu
 }
 ```
 
+Sounds can be enabled with `:ReverbEnable` and disabled with `:ReverbDisable`.
+
 ## Sound Effects
 
-Free (CC0) interface sounds at [https://www.kenney.nl/assets/interface-sounds](https://www.kenney.nl/assets/interface-sounds)
+- By default, reverb.nvim does *not* ship with any sounds. 
+- Free (CC0) interface sounds at [https://www.kenney.nl/assets/interface-sounds](https://www.kenney.nl/assets/interface-sounds)
 
 ## License
 
