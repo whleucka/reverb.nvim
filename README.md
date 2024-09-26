@@ -45,8 +45,8 @@ You can manage the sound settings in reverb.nvim with the following commands:
 
 ## Sound Effects
 
-- By default, reverb.nvim does *not* ship with any sounds. 
-- Free (CC0) interface sounds at [https://www.kenney.nl/assets/interface-sounds](https://www.kenney.nl/assets/interface-sounds)
+- Note: reverb.nvim does not include any sound files.
+- You can find free (CC0) interface sounds at [https://www.kenney.nl/assets/interface-sounds](https://www.kenney.nl/assets/interface-sounds)
 
 ## License
 
