@@ -24,9 +24,9 @@ To get started, configure the plugin's options in your Neovim configuration. Her
     player = "paplay", -- options: paplay (default), pw-play, mpv
     max_sounds = 20, -- Limit the amount of sounds that can play at the same time
     sounds = {
-      -- add custom sound paths for other events here
-      -- eg. EVENT = "/some/path/to/sound.mp3"
-      BufRead = { path = sound_dir .. "start.ogg", volume = 0-100 },
+      -- Add custom sound paths or lists of sounds for other events here
+      -- For example, BufRead can play a random sound from a list
+      BufRead = { path = { sound_dir .. "start1.ogg", sound_dir .. "start2.ogg" }, volume = 0-100 },
       CursorMovedI = { path = sound_dir .. "click.ogg", volume = 0-100 },
       InsertLeave = { path = sound_dir .. "toggle.ogg", volume = 0-100 },
       ExitPre = { path = sound_dir .. "exit.ogg", volume = 0-100 },
