@@ -14,8 +14,9 @@ Sound files cam be played with `paplay`, `pw-play` or `mpv`. Check with your loc
 
 ## Installation
 
-To get started, configure the plugin's options in your Neovim configuration. Here's an example of customizing the sounds using [Lazy](https://github.com/folke/lazy.nvim):
+To get started, configure the plugin's options in your Neovim configuration. Here's a few examples) 
 
+[Lazy](https://github.com/folke/lazy.nvim):
 ```lua
 {
   "whleucka/reverb.nvim",
@@ -35,6 +36,28 @@ To get started, configure the plugin's options in your Neovim configuration. Her
   },
 }
 ```
+
+neovim 0.12+ vim.pack:
+```lua
+vim.pack.add({
+  {
+    src = "https://github.com/whleucka/reverb.nvim",
+    name = "reverb",
+  }
+})
+require("reverb").setup({
+  player = "paplay",
+  max_sounds = 20,
+  sounds = {
+    BufRead = { path = { sound_dir .. "start1.ogg", sound_dir .. "start2.ogg" }, volume = 0-100 },
+    CursorMovedI = { path = sound_dir .. "click.ogg", volume = 0-100 },
+    InsertLeave = { path = sound_dir .. "toggle.ogg", volume = 0-100 },
+    ExitPre = { path = sound_dir .. "exit.ogg", volume = 0-100 },
+    BufWrite = { path = sound_dir .. "save.ogg", volume = 0-100 },
+  },
+})
+```
+
 
 You can manage the sound settings in reverb.nvim with the following commands:
 
