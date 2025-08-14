@@ -18,7 +18,8 @@ To get started, configure the plugin's options in your Neovim configuration. Her
 
 [Lazy](https://github.com/folke/lazy.nvim):
 ```lua
-{
+local sound_dir = "/some/path/to/sounds/"
+return {
   "whleucka/reverb.nvim",
   event = "BufReadPre",
   opts = {
@@ -39,6 +40,7 @@ To get started, configure the plugin's options in your Neovim configuration. Her
 
 neovim 0.12+ vim.pack:
 ```lua
+local sound_dir = "/some/path/to/sounds/"
 vim.pack.add({
   {
     src = "https://github.com/whleucka/reverb.nvim",
