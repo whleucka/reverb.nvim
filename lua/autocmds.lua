@@ -1,4 +1,5 @@
 local utils = require("utils")
+local state = require("state")
 
 local M = {}
 
@@ -7,8 +8,6 @@ vim.api.nvim_create_augroup("reverb", {
 })
 
 local missing_sounds = {}
-
-RUNNING_PROCESSES = 0
 
 -- Helper function to pick a random sound file if 'sound.path' is a list
 local function get_sound_path(sound)
@@ -22,7 +21,7 @@ end
 
 local cb = function(event, sound, player, max_sounds)
     -- Don't do anything if the plugin is disabled
-    if not PLUGIN_ENABLED then
+    if not state.enabled then
         return
     end
 
@@ -31,7 +30,7 @@ local cb = function(event, sound, player, max_sounds)
 
     -- Don't play if enough processes are already playing
     local max_running_processes = max_sounds or 20
-    if RUNNING_PROCESSES >= max_running_processes then
+    if state.running_processes >= max_running_processes then
         return
     end
 
@@ -51,19 +50,19 @@ local cb = function(event, sound, player, max_sounds)
         if event == "BufWrite" then
             -- only if the buffer has been modified ?
             local buf = vim.api.nvim_get_current_buf()
-            local buf_modified = vim.api.nvim_buf_get_option(buf, "modified")
+            local buf_modified = vim.bo[buf].modified
             if buf_modified then
-                RUNNING_PROCESSES = RUNNING_PROCESSES + 1
+                state.running_processes = state.running_processes + 1
                 player_function(path, sound.volume)
             end
         else
-            RUNNING_PROCESSES = RUNNING_PROCESSES + 1
+            state.running_processes = state.running_processes + 1
             player_function(path, sound.volume)
         end
     else
         if not missing_sounds[path] then
             missing_sounds[path] = true
-            print("file " .. path .. "does not exist")
+            vim.notify("reverb.nvim: file " .. path .. " does not exist", vim.log.levels.WARN)
         end
     end
 end

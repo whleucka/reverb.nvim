@@ -1,12 +1,6 @@
 local M = {}
 local uv = vim.uv
-
-local function finished_playing(code)
-    RUNNING_PROCESSES = RUNNING_PROCESSES -1
-    if code ~= 0 then
-        print("reverb.nvim: Couldn't play sound, exit code: " .. code)
-    end
-end
+local state = require("state")
 
 -- Returns a value between 0.0 and 1.0
 local function convert_volume(human_volume)
@@ -16,46 +10,47 @@ local function convert_volume(human_volume)
     return normalized_volume
 end
 
--- Play a sound using paplay
-M.paplay_play_sound = function(path, human_volume)
-    local volume = math.floor(convert_volume(human_volume) * 65536.0)
-    local handle, pid = uv.spawn('paplay', { args = { path, '--volume', tostring(volume) } }, finished_playing)
+-- Spawn a player process and handle cleanup
+local function spawn_player(cmd, args)
+    local handle
+    handle = uv.spawn(cmd, { args = args }, function(code)
+        state.running_processes = state.running_processes - 1
+        if handle and not handle:is_closing() then
+            handle:close()
+        end
+        if code ~= 0 then
+            vim.schedule(function()
+                vim.notify("reverb.nvim: Couldn't play sound, exit code: " .. code, vim.log.levels.ERROR)
+            end)
+        end
+    end)
     if handle == nil then
-        print("reverb.nvim: Could not spawn paplay")
+        vim.notify("reverb.nvim: Could not spawn " .. cmd, vim.log.levels.ERROR)
     end
 end
 
--- Play a sound using pwplay
+-- Play a sound using paplay
+M.paplay_play_sound = function(path, human_volume)
+    local volume = math.floor(convert_volume(human_volume) * 65536.0)
+    spawn_player('paplay', { path, '--volume', tostring(volume) })
+end
+
+-- Play a sound using pw-play
 M.pw_play_play_sound = function(path, human_volume)
     local volume = convert_volume(human_volume)
-    local handle, pid = uv.spawn('pw-play', { args = { path, '--volume', tostring(volume) } }, finished_playing)
-    if handle == nil then
-        print("reverb.nvim: Could not spawn pw-play")
-    end
+    spawn_player('pw-play', { path, '--volume', tostring(volume) })
 end
 
 -- Play a sound using mpv
 M.mpv_play_sound = function(path, human_volume)
     local volume = convert_volume(human_volume) * 100
-    local handle, pid = uv.spawn('mpv', {
-            args = { path, '--volume='..tostring(volume), '--no-keep-open' },
-            verbatism = true  -- To fix some issue with quoting paths on windows
-        }, finished_playing)
-    if handle == nil then
-        print("reverb.nvim: Could not spawn mpv")
-    end
+    spawn_player('mpv', { path, '--volume=' .. tostring(volume), '--no-keep-open' })
 end
 
--- Good old path exists function
+-- Check if a file exists using libuv
 M.path_exists = function(path)
-    local ok, err, code = os.rename(path, path)
-    if not ok then
-        if code == 13 then
-            -- Permission denied, but it exists
-            return true
-        end
-    end
-    return ok, err
+    local stat = uv.fs_stat(path)
+    return stat ~= nil
 end
 
-return M;
+return M

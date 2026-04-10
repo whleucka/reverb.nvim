@@ -1,22 +1,21 @@
 local settings = require("settings")
 local autocmds = require("autocmds")
+local state = require("state")
 
 local M = {}
 
-PLUGIN_ENABLED = true -- default
-
 function M.enable()
-    PLUGIN_ENABLED = true
-    print("reverb.nvim: Plugin enabled")
+    state.enabled = true
+    vim.notify("reverb.nvim: Plugin enabled", vim.log.levels.INFO)
 end
 
 function M.disable()
-    PLUGIN_ENABLED = false
-    print("reverb.nvim: Plugin disabled")
+    state.enabled = false
+    vim.notify("reverb.nvim: Plugin disabled", vim.log.levels.INFO)
 end
 
 function M.toggle()
-    if PLUGIN_ENABLED then
+    if state.enabled then
         M.disable()
     else
         M.enable()
