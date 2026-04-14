@@ -1,5 +1,5 @@
-local utils = require("utils")
-local state = require("state")
+local utils = require("reverb.utils")
+local state = require("reverb.state")
 
 local M = {}
 

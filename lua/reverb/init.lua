@@ -1,6 +1,6 @@
-local settings = require("settings")
-local autocmds = require("autocmds")
-local state = require("state")
+local settings = require("reverb.settings")
+local autocmds = require("reverb.autocmds")
+local state = require("reverb.state")
 
 local M = {}
 

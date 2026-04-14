@@ -1,6 +1,6 @@
 local M = {}
 local uv = vim.uv
-local state = require("state")
+local state = require("reverb.state")
 
 -- Returns a value between 0.0 and 1.0
 local function convert_volume(human_volume)
