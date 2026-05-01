@@ -67,17 +67,30 @@ local cb = function(event, sound, player, max_sounds)
     end
 end
 
+-- Register a single sound binding for an event
+local function register(event, sound, opts)
+    vim.api.nvim_create_autocmd(event, {
+        group = "reverb",
+        pattern = sound.pattern or "*",
+        callback = function()
+            cb(event, sound, opts.player, opts.max_sounds)
+        end,
+    })
+end
+
 -- Options are loaded from lua/reverb.lua
 M.load = function(opts)
     local sounds = opts.sounds
     for event, sound in pairs(sounds) do
-        vim.api.nvim_create_autocmd(event, {
-            group = "reverb",
-            pattern = "*",
-            callback = function()
-                cb(event, sound, opts.player, opts.max_sounds)
-            end,
-        })
+        -- A value can be either a single sound config, or a list of configs
+        -- (so the same event can bind multiple patterns, e.g. several User events).
+        if sound[1] ~= nil then
+            for _, entry in ipairs(sound) do
+                register(event, entry, opts)
+            end
+        else
+            register(event, sound, opts)
+        end
     end
 end
 
