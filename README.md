@@ -63,12 +63,13 @@ require("reverb").setup({
 
 ### Patterns and `User` events
 
-By default each binding listens with `pattern = "*"`. You can scope a binding to a specific pattern with the `pattern` field — useful for `User` events and any event that distinguishes kinds via the pattern (e.g. `PackChanged`):
+By default each binding listens with `pattern = "*"`. You can scope a binding to a specific pattern with the `pattern` field. This is useful for `User` events and any event that distinguishes kinds via the pattern (e.g. `PackChanged`):
 
 ```lua
 sounds = {
-  -- Fugitive's User event
-  User = { path = sound_dir .. "git.ogg", volume = 50, pattern = "FugitiveChanged" },
+  User = {
+    { path  = sound_dir .. "flawless.mp3", volume = 65, pattern = "NeogitPushComplete" },
+  },
   -- Only fire on package updates, not install/delete
   PackChanged = { path = sound_dir .. "ding.ogg", volume = 50, pattern = "update" },
 }
@@ -79,8 +80,8 @@ To bind multiple patterns to the same event, pass a list of configs:
 ```lua
 sounds = {
   User = {
-    { path = sound_dir .. "git.ogg",  volume = 50, pattern = "FugitiveChanged" },
-    { path = sound_dir .. "boot.ogg", volume = 50, pattern = "LazyVimStarted" },
+    { path  = sound_dir .. "flawless.mp3", volume = 65, pattern = "NeogitPushComplete" },,
+    { path = sound_dir .. "boot.ogg", volume = 50, pattern = "SomeOtherEvent" },
   },
 }
 ```
