@@ -1,0 +1,23 @@
+name: lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  luacheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: install luacheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends lua5.1 luarocks
+          sudo luarocks install luacheck
+
+      - name: luacheck
+        run: |
+          luacheck --version
+          luacheck lua/
